@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jokerpz.mapper.UserMapper">
+    <select id="selectByUsername" resultType="com.jokerpz.pojo.User">
+        select  * from t_user where username = #{param}
+    </select>
+
+    <select id="selectAllRoleByUserId" resultType="String">
+        SELECT r.name from t_role_user u, t_role r where r.id = u.rid and u.uid = #{param}
+    </select>
+
+    <select id="selectPermissionsByUserId" resultType="String">
+        SELECT permission from t_role_user u, t_role r, t_role_menu rm, t_menu m where r.id = u.rid and u.rid = rm.rid and rm.mid = m.id and  u.uid = #{param}
+    </select>
+
+</mapper>
